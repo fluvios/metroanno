@@ -130,13 +130,77 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                       <div className="mb-3">
                         <label className="form-label">Tipe Pertanyaan</label>
                         <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                          <a href="#" className="btn btn-bg-info">Info</a>
+                          <a href="#" className="btn btn-bg-info">Type 1</a>
+                          <a href="#" className="btn btn-bg-success">Type 2</a>
+                          <a href="#" className="btn btn-bg-warning">Type 3</a>
+                          <a href="#" className="btn btn-bg-danger">Type 4</a>
                         </div>                        
+                        <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
+                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
+                          <input
+                            type="text"
+                            className="form-control form-control-white"
+                            placeholder=""
+                          />
+                        </div>  
+                        <div className="mb-3">
+                          <button
+                              type='reset'
+                              onClick={() => cancel()}
+                              className='btn btn-success me-3 pull-right'
+                              data-kt-users-modal-action='cancel'
+                              disabled={formik.isSubmitting || isUserLoading}
+                            >
+                              Selesai Highlight
+                          </button>                                                                      
+                        </div>
+                        <label className="form-label">Tulis Pertanyaan</label>
+                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
+                          <input
+                            type="text"
+                            className="form-control form-control-white"
+                            placeholder=""
+                          />
+                        </div>                                                
+                        <label className="form-label">Tulis Jawaban yang diharapkan</label>
+                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
+                          <input
+                            type="text"
+                            className="form-control form-control-white"
+                            placeholder=""
+                          />
+                        </div>  
+                        <button
+                            type='reset'
+                            onClick={() => cancel()}
+                            className='btn btn-success me-3 pull-right'
+                            data-kt-users-modal-action='cancel'
+                            disabled={formik.isSubmitting || isUserLoading}
+                          >
+                            Submit Pertanyaan
+                        </button>                                                                      
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
+              <div className="mb-6">
+                <label className="form-label">Feedback Catatan</label>
+                <input
+                  type="text"
+                  className="form-control form-control-white"
+                  placeholder=""
+                />
+              </div>
+              <button
+                type='reset'
+                onClick={() => cancel()}
+                className='btn btn-light me-3 pull-right'
+                data-kt-users-modal-action='cancel'
+                disabled={formik.isSubmitting || isUserLoading}
+              >
+                Submit Feedback
+              </button>              
             </div>            
           </div>
         </div>
@@ -150,7 +214,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             data-kt-users-modal-action='cancel'
             disabled={formik.isSubmitting || isUserLoading}
           >
-            Discard
+            Anotasi Materi Berikutnya
           </button>
 
           <button
@@ -159,7 +223,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             data-kt-users-modal-action='submit'
             disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
           >
-            <span className='indicator-label'>Submit</span>
+            <span className='indicator-label'>Selesai/Kembali ke Dashboard</span>
             {(formik.isSubmitting || isUserLoading) && (
               <span className='indicator-progress'>
                 Please wait...{' '}
