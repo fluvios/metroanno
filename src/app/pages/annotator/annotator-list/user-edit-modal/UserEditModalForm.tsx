@@ -185,6 +185,16 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                 </div>
               </div>
               <div className="mb-6">
+                <button
+                  type='reset'
+                  onClick={() => cancel()}
+                  className='btn btn-success me-3 pull-right'
+                  data-kt-users-modal-action='cancel'
+                  disabled={formik.isSubmitting || isUserLoading}>
+                  Tambah Pertanyaan
+                </button>                                                                      
+              </div>
+              <div className="mb-6">
                 <label className="form-label">Feedback Catatan</label>
                 <input
                   type="text"
