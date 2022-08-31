@@ -15,6 +15,8 @@ const PrivateRoutes = () => {
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
+  const AnnotatorPage = lazy(() => import('../pages/annotator/AnnotatorPage'))
+  const MaterialPage = lazy(() => import('../pages/material/MaterialPage'))
 
   return (
     <Routes>
@@ -74,6 +76,22 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+        <Route
+          path='annotator/*'
+          element={
+            <SuspensedView>
+              <AnnotatorPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='material/*'
+          element={
+            <SuspensedView>
+              <MaterialPage />
+            </SuspensedView>
+          }
+        />        
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>
