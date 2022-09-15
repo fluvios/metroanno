@@ -8,6 +8,7 @@ import {useListView} from '../core/ListViewProvider'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
 import {createUser, updateUser} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
+// import {QuestionBuilderForm} from '../../annotator-list/user-edit-modal/QuestionBuilderForm'
 
 type Props = {
   isUserLoading: boolean
@@ -26,9 +27,14 @@ const editUserSchema = Yup.object().shape({
     .required('Name is required'),
 })
 
+const Input = () => {
+  return <input placeholder="Your input here" />;
+}
+
 const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
+  const [inputList, setInputList] = useState([])
 
   const [userForEdit] = useState<QuestionAnnotation>({
     ...user,
@@ -41,6 +47,10 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
       refetch()
     }
     setItemIdForUpdate(undefined)
+  }
+
+  const addQuestion = () => {
+    setInputList(inputList.concat(<Input key={} />))
   }
 
   const formik = useFormik({
@@ -104,90 +114,11 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
           </div>
           <div className='col-md-6'>
             <div className='mb-6'>
-              <div className="accordion accordion-icon-toggle" id="kt_accordion_2">
-                <div className="mb-5">
-                  <div
-                    className="accordion-header py-3 d-flex"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#kt_accordion_2_item_1"
-                  >
-                    <span className="accordion-icon">
-                      <KTSVG
-                        className="svg-icon svg-icon-4"
-                        path="/media/icons/duotune/arrows/arr064.svg"
-                      />
-                    </span>
-                    <h3 className="fs-4 text-gray-800 fw-bold mb-0 ms-4">
-                      Pertanyaan 1
-                    </h3>
-                  </div>
-                  <div
-                    id="kt_accordion_2_item_1"
-                    className="fs-6 collapse show ps-10"
-                    data-bs-parent="#kt_accordion_2"
-                  >
-                    <form action="">
-                      <div className="mb-3">
-                        <label className="form-label">Tipe Pertanyaan</label>
-                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                          <a href="#" className="btn btn-bg-info">Type 1</a>
-                          <a href="#" className="btn btn-bg-success">Type 2</a>
-                          <a href="#" className="btn btn-bg-warning">Type 3</a>
-                          <a href="#" className="btn btn-bg-danger">Type 4</a>
-                        </div>                        
-                        <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
-                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                          <input
-                            type="text"
-                            className="form-control form-control-white"
-                            placeholder=""
-                          />
-                        </div>  
-                        <div className="mb-3">
-                          <button
-                              type='reset'
-                              onClick={() => cancel()}
-                              className='btn btn-success me-3 pull-right'
-                              data-kt-users-modal-action='cancel'
-                              disabled={formik.isSubmitting || isUserLoading}
-                            >
-                              Selesai Highlight
-                          </button>                                                                      
-                        </div>
-                        <label className="form-label">Tulis Pertanyaan</label>
-                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                          <input
-                            type="text"
-                            className="form-control form-control-white"
-                            placeholder=""
-                          />
-                        </div>                                                
-                        <label className="form-label">Tulis Jawaban yang diharapkan</label>
-                        <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                          <input
-                            type="text"
-                            className="form-control form-control-white"
-                            placeholder=""
-                          />
-                        </div>  
-                        <button
-                            type='reset'
-                            onClick={() => cancel()}
-                            className='btn btn-success me-3 pull-right'
-                            data-kt-users-modal-action='cancel'
-                            disabled={formik.isSubmitting || isUserLoading}
-                          >
-                            Submit Pertanyaan
-                        </button>                                                                      
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+              {inputList}
               <div className="mb-6">
                 <button
                   type='reset'
-                  onClick={() => cancel()}
+                  onClick={() => addQuestion()}
                   className='btn btn-success me-3 pull-right'
                   data-kt-users-modal-action='cancel'
                   disabled={formik.isSubmitting || isUserLoading}>
