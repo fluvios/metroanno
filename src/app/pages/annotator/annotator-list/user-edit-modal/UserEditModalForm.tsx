@@ -8,7 +8,7 @@ import {useListView} from '../core/ListViewProvider'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
 import {createUser, updateUser} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
-// import {QuestionBuilderForm} from '../../annotator-list/user-edit-modal/QuestionBuilderForm'
+import {QuestionBuilderForm} from '../../annotator-list/user-edit-modal/QuestionBuilderForm'
 
 type Props = {
   isUserLoading: boolean
@@ -27,14 +27,10 @@ const editUserSchema = Yup.object().shape({
     .required('Name is required'),
 })
 
-const Input = () => {
-  return <input placeholder="Your input here" />;
-}
-
 const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
-  const [inputList, setInputList] = useState([])
+  const [inputList, setInputList] = useState<any[]>([])
 
   const [userForEdit] = useState<QuestionAnnotation>({
     ...user,
@@ -50,7 +46,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   }
 
   const addQuestion = () => {
-    setInputList(inputList.concat(<Input key={} />))
+    setInputList(inputList.concat(<QuestionBuilderForm />))
   }
 
   const formik = useFormik({
@@ -105,11 +101,21 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             </div>
             <div className='mb-6'>
               <label className="form-label">Materi</label>
-              <input
-                type="text"
-                className="form-control form-control-white"
-                placeholder=""
-              />
+              <div id="materialContent" className="form-control form-control-white">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Suspendisse varius tortor quis nulla cursus vulputate. 
+              Vivamus sit amet dui sollicitudin tortor placerat tincidunt. 
+              Aenean rhoncus vel orci in dignissim. 
+              Sed rutrum aliquam felis eget cursus. 
+              Mauris interdum nibh in mi blandit, sit amet porta velit scelerisque. 
+              Vestibulum turpis nunc, interdum imperdiet commodo quis, luctus vel eros. 
+              Ut at convallis dolor. Vestibulum elementum leo lacus, accumsan eleifend risus bibendum non. 
+              Ut imperdiet rhoncus commodo. Etiam facilisis ligula a dictum eleifend. 
+              Morbi molestie risus quis enim finibus, et vestibulum libero pellentesque. 
+              Sed auctor urna vel nunc efficitur sagittis. Proin porttitor luctus neque sit amet molestie. 
+              Donec diam ligula, tristique lacinia ex quis, vulputate lacinia lorem. 
+              Nam suscipit metus eget tristique tincidunt.
+              </div>
             </div>            
           </div>
           <div className='col-md-6'>

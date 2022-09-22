@@ -1,7 +1,38 @@
 import {KTSVG} from '../../../../../_metronic/helpers'
+import Mark from 'mark.js'
+import Tags from "@yaireo/tagify/dist/react.tagify" // React-wrapper file
+import "@yaireo/tagify/dist/tagify.css" // Tagify CSS
+import { useState } from 'react'
 
+// document.onmouseup = () => {
+//   const highlightText = document.getSelection()
+//   const startText = highlightText?.anchorOffset as number
+//   const endText = highlightText?.focusOffset as number
+//   const fullText = document.getElementById('materialContent')?.innerHTML as string
+//   console.log(fullText.substring(startText,endText))
+// }
 
 const QuestionBuilderForm = () => {
+  const [tags,setTags] = useState("")
+
+  const highlightText = () => {
+    const materialText = document.getElementById('materialContent') as HTMLInputElement
+    const highlightText = document.getSelection()
+    const startText = highlightText?.anchorOffset as number
+    const endText = highlightText?.focusOffset as number
+    const lengthText = endText - startText
+    const fullText = document.getElementById('materialContent')?.innerHTML as string  
+    const markInstance = new Mark(materialText)
+    markInstance.markRanges([{
+      start: startText,
+      length: lengthText
+    }])
+
+    let tagInfo = fullText.substring(startText,endText)
+  
+    setTags(fullText.substring(startText,endText))
+  }
+
   return (
     <div className="accordion accordion-icon-toggle" id="kt_accordion_2">
     <div className="mb-5">
@@ -29,18 +60,19 @@ const QuestionBuilderForm = () => {
           <div className="mb-3">
             <label className="form-label">Tipe Pertanyaan</label>
             <div className="form-check form-switch form-check-custom form-check-solid me-10">
-              <a href="#" className="btn btn-bg-info">Type 1</a>
-              <a href="#" className="btn btn-bg-success">Type 2</a>
-              <a href="#" className="btn btn-bg-warning">Type 3</a>
-              <a href="#" className="btn btn-bg-danger">Type 4</a>
+              <button type="button" className="btn btn-bg-info" onClick={() => highlightText()}>Type 1</button>
+              <button type="button" className="btn btn-bg-success" onClick={() => highlightText()}>Type 2</button>
+              <button type="button" className="btn btn-bg-warning" onClick={() => highlightText()}>Type 3</button>
+              <button type="button" className="btn btn-bg-danger" onClick={() => highlightText()}>Type 4</button>
             </div>                        
             <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
             <div className="form-check form-switch form-check-custom form-check-solid me-10">
-              <input
+            <input
                 type="text"
                 className="form-control form-control-white"
-                placeholder=""
+                value={tags}
               />
+              {/* <Tags name="highlightTags" className="form-control form-control-white" /> */}
             </div>  
             <div className="mb-3">
               <button
