@@ -3,6 +3,8 @@ import Mark from 'mark.js'
 import Tags from "@yaireo/tagify/dist/react.tagify" // React-wrapper file
 import "@yaireo/tagify/dist/tagify.css" // Tagify CSS
 import { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 // document.onmouseup = () => {
 //   const highlightText = document.getSelection()
@@ -28,9 +30,8 @@ const QuestionBuilderForm = () => {
       length: lengthText
     }])
 
-    let tagInfo = fullText.substring(startText,endText)
-  
-    setTags(fullText.substring(startText,endText))
+    let tagInfo = fullText.substring(startText,endText) + "[" + startText + "," + endText + "]"
+    setTags(tags + "," + tagInfo)
   }
 
   return (
@@ -60,21 +61,26 @@ const QuestionBuilderForm = () => {
           <div className="mb-3">
             <label className="form-label">Tipe Pertanyaan</label>
             <div className="form-check form-switch form-check-custom form-check-solid me-10">
-              <button type="button" className="btn btn-bg-info" onClick={() => highlightText()}>Type 1</button>
-              <button type="button" className="btn btn-bg-success" onClick={() => highlightText()}>Type 2</button>
-              <button type="button" className="btn btn-bg-warning" onClick={() => highlightText()}>Type 3</button>
-              <button type="button" className="btn btn-bg-danger" onClick={() => highlightText()}>Type 4</button>
+              <ButtonGroup aria-label="Basic example">
+                <Button className="btn btn-bg-info" variant="secondary" onClick={() => highlightText()}>Type 1</Button>
+                <Button className="btn btn-bg-success" variant="secondary" onClick={() => highlightText()}>Type 2</Button>
+                <Button className="btn btn-bg-warning" variant="secondary" onClick={() => highlightText()}>Type 3</Button>
+                <Button className="btn btn-bg-danger" variant="secondary" onClick={() => highlightText()}>Type 4</Button>                
+              </ButtonGroup>              
             </div>                        
             <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
             <div className="form-check form-switch form-check-custom form-check-solid me-10">
-            <input
+              <textarea className="form-control form-control-white" name="tags" id="tags" cols={30} rows={10}>
+                {tags}
+              </textarea>
+            {/* <input
                 type="text"
                 className="form-control form-control-white"
                 value={tags}
-              />
+              /> */}
               {/* <Tags name="highlightTags" className="form-control form-control-white" /> */}
             </div>  
-            <div className="mb-3">
+            <div className="mb-5 pull-right">
               <button
                   type='reset'
                 //   onClick={() => cancel()}
