@@ -31,6 +31,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
   const [inputList, setInputList] = useState<any[]>([])
+  const [questFlags,setQuestFlag] = useState(1)
 
   const [userForEdit] = useState<QuestionAnnotation>({
     ...user,
@@ -46,7 +47,8 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   }
 
   const addQuestion = () => {
-    setInputList(inputList.concat(<QuestionBuilderForm />))
+    setQuestFlag(questFlags+1)
+    setInputList(inputList.concat(<QuestionBuilderForm questFlags={questFlags} />))
   }
 
   const formik = useFormik({
