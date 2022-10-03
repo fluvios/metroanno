@@ -30,7 +30,7 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
       length: lengthText
     }])
 
-    let tagInfo = fullText.substring(startText,endText) + "[" + startText + "," + endText + "]"
+    let tagInfo = fullText.substring(startText,endText) + "[" + startText + ";" + endText + "]"
     setTags(tags + "," + tagInfo)
   }
 
@@ -70,14 +70,14 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
               </div>                        
               <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
               <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                <textarea className="form-control form-control-white" name="tags" id="tags" cols={30} rows={10} value={tags}>
-                </textarea>
+                {/* <textarea className="form-control form-control-white" name="tags" id="tags" cols={30} rows={10} value={tags}>
+                </textarea> */}
               {/* <input
                   type="text"
                   className="form-control form-control-white"
                   value={tags}
                 /> */}
-                {/* <Tags name="highlightTags" className="form-control form-control-white" /> */}
+                <Tags name="highlightTags" className="form-control form-control-white" value={tags} />
               </div>  
               <div className="d-flex justify-content-end py-6 px-9">
                 <button
