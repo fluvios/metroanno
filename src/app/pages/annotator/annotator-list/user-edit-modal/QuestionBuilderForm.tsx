@@ -16,19 +16,20 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 const QuestionBuilderForm: FC<any> = ({questFlags}) => {
   const [tags,setTags] = useState("")
+  const fullText = document.getElementById('materialContent')?.innerHTML as string
 
   const highlightText = () => {
+    console.log(document.getSelection())
     const materialText = document.getElementById('materialContent') as HTMLInputElement
     const highlightText = document.getSelection()
     const startText = highlightText?.anchorOffset as number
     const endText = highlightText?.focusOffset as number
-    const lengthText = endText - startText
-    const fullText = document.getElementById('materialContent')?.innerHTML as string  
-    const markInstance = new Mark(materialText)
-    markInstance.markRanges([{
-      start: startText,
-      length: lengthText
-    }])
+    const lengthText = endText - startText  
+    // const markInstance = new Mark(materialText)
+    // markInstance.markRanges([{
+    //   start: startText,
+    //   length: lengthText
+    // }])
 
     let tagInfo = fullText.substring(startText,endText) + "[" + startText + ";" + endText + "]"
     setTags(tags + "," + tagInfo)
@@ -62,10 +63,10 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
               <label className="form-label">Tipe Pertanyaan</label>
               <div className="form-check form-switch form-check-custom form-check-solid me-10">
                 <ButtonGroup aria-label="Basic example">
-                  <Button className="btn btn-bg-info" variant="secondary" onClick={() => highlightText()}>Type 1</Button>
-                  <Button className="btn btn-bg-success" variant="secondary" onClick={() => highlightText()}>Type 2</Button>
-                  <Button className="btn btn-bg-warning" variant="secondary" onClick={() => highlightText()}>Type 3</Button>
-                  <Button className="btn btn-bg-danger" variant="secondary" onClick={() => highlightText()}>Type 4</Button>                
+                  <Button className="btn btn-bg-info" variant="secondary">Type 1</Button>
+                  <Button className="btn btn-bg-success" variant="secondary">Type 2</Button>
+                  <Button className="btn btn-bg-warning" variant="secondary">Type 3</Button>
+                  <Button className="btn btn-bg-danger" variant="secondary">Type 4</Button>                
                 </ButtonGroup>              
               </div>                        
               <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
@@ -81,14 +82,21 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
               </div>  
               <div className="d-flex justify-content-end py-6 px-9">
                 <button
+                    type='button'
+                    onClick={() => highlightText()}
+                    className='btn btn-success me-3'
+                  >
+                    Tambah Highlight
+                </button>                
+                <button
                     type='reset'
                   //   onClick={() => cancel()}
-                    className='btn btn-success me-3'
+                    className='btn btn-info me-3'
                     data-kt-users-modal-action='cancel'
                   //   disabled={formik.isSubmitting || isUserLoading}
                   >
                     Selesai Highlight
-                </button>                                                                      
+                </button>
               </div>
               <label className="form-label">Tulis Pertanyaan</label>
               <div className="form-check form-switch form-check-custom form-check-solid me-10">
