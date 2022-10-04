@@ -5,6 +5,7 @@ import Tags from "@yaireo/tagify/dist/react.tagify" // React-wrapper file
 import "@yaireo/tagify/dist/tagify.css" // Tagify CSS
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Tagify from '@yaireo/tagify'
 
 // document.onmouseup = () => {
 //   const highlightText = document.getSelection()
@@ -16,11 +17,13 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 const QuestionBuilderForm: FC<any> = ({questFlags}) => {
   const [tags,setTags] = useState("")
+  const materialText = document.getElementById('materialContent') as HTMLInputElement
   const fullText = document.getElementById('materialContent')?.innerHTML as string
+  const tempTags = document.getElementById('tags') as HTMLInputElement
+  const highlightTags = new Tagify(tempTags)
 
   const highlightText = () => {
     console.log(document.getSelection())
-    const materialText = document.getElementById('materialContent') as HTMLInputElement
     const highlightText = document.getSelection()
     const startText = highlightText?.anchorOffset as number
     const endText = highlightText?.focusOffset as number
@@ -32,8 +35,22 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
     // }])
 
     let tagInfo = fullText.substring(startText,endText) + "[" + startText + ";" + endText + "]"
-    setTags(tags + "," + tagInfo)
+    if(tags == "") {
+      setTags(tags + tagInfo)
+    } else {
+      setTags(tags + "," + tagInfo)
+    }
   }
+
+  highlightTags
+  .on('add', e => {
+    console.log(tags)
+  })
+  .on('remove', e => {
+    const regex = e.detail.data?.value as string
+    setTags(tags.replace(regex+",",""))
+    console.log(tags)
+  })
 
   return (
     <div className="accordion accordion-icon-toggle" id={"kt_question_" + questFlags}>
@@ -71,14 +88,14 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
               </div>                        
               <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
               <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                {/* <textarea className="form-control form-control-white" name="tags" id="tags" cols={30} rows={10} value={tags}>
-                </textarea> */}
+                <textarea className="form-control form-control-white" name="tags" id="tags" cols={1} rows={1} value={tags}>
+                </textarea>
               {/* <input
                   type="text"
                   className="form-control form-control-white"
                   value={tags}
                 /> */}
-                <Tags name="highlightTags" className="form-control form-control-white" value={tags} />
+                {/* <Tags name="highlightTags" className="form-control form-control-white" value={tags} /> */}
               </div>  
               <div className="d-flex justify-content-end py-6 px-9">
                 <button
