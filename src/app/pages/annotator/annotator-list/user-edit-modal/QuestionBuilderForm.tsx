@@ -17,18 +17,20 @@ import Tagify from '@yaireo/tagify'
 
 const QuestionBuilderForm: FC<any> = ({questFlags}) => {
   const [tags,setTags] = useState("")
-  const materialText = document.getElementById('materialContent') as HTMLInputElement
-  const fullText = document.getElementById('materialContent')?.innerHTML as string
+  let materialText = document.getElementById('materialContent') as HTMLDivElement
+  let fullText = document.getElementById('materialContent')?.innerHTML as string
   const tempTags = document.getElementById('tags') as HTMLInputElement
   const highlightTags = new Tagify(tempTags)
+  const markInstance = new Mark(materialText)
 
   const highlightText = () => {
-    console.log(document.getSelection())
+    // console.log(document.getSelection())
+    materialText = document.getElementById('materialContent') as HTMLDivElement
+    fullText = document.getElementById('materialContent')?.innerHTML as string    
     const highlightText = document.getSelection()
     const startText = highlightText?.anchorOffset as number
     const endText = highlightText?.focusOffset as number
-    const lengthText = endText - startText  
-    // const markInstance = new Mark(materialText)
+    const lengthText = endText - startText
     // markInstance.markRanges([{
     //   start: startText,
     //   length: lengthText
@@ -44,12 +46,12 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
 
   highlightTags
   .on('add', e => {
-    console.log(tags)
+    // console.log(tags)
   })
   .on('remove', e => {
     const regex = e.detail.data?.value as string
     setTags(tags.replace(regex+",",""))
-    console.log(tags)
+    // console.log(tags)
   })
 
   return (
