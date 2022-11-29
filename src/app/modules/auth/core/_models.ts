@@ -1,3 +1,11 @@
+export interface AuthBodyModel {
+  code: number
+  message: string
+  data: {
+    access_token: string
+  }
+}
+
 export interface AuthModel {
   api_token: string
   refreshToken?: string

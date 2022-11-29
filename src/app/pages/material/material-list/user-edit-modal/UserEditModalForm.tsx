@@ -6,7 +6,7 @@ import {initialMaterial, Material} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
-import {createUser, updateUser} from '../core/_requests'
+import {createDocument, editDocument} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 
 type Props = {
@@ -50,9 +50,9 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
       setSubmitting(true)
       try {
         if (isNotEmpty(values.ID)) {
-          await updateUser(values)
+          await editDocument(values)
         } else {
-          await createUser(values)
+          await createDocument(values)
         }
       } catch (ex) {
         console.error(ex)

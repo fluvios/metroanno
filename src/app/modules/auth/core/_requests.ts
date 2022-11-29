@@ -1,17 +1,25 @@
 import axios from 'axios'
-import {AuthModel, UserModel} from './_models'
+import {AuthBodyModel, UserModel} from './_models'
 
 const API_URL = process.env.REACT_APP_API_URL
+// const API_URL = 'https://api.metroanno.fanzru.dev'
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`
-export const LOGIN_URL = `${API_URL}/login`
+export const LOGIN_URL = `${API_URL}/accounts/login/annotator`
 export const REGISTER_URL = `${API_URL}/register`
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
 // Server should return AuthModel
-export function login(email: string, password: string) {
-  return axios.post<AuthModel>(LOGIN_URL, {
-    email,
+// export function login(email: string, password: string) {
+//   return axios.post<AuthModel>(LOGIN_URL, {
+//     email,
+//     password,
+//   })
+// }
+
+export function login(username: string, password: string) {
+  return axios.post<AuthBodyModel>(LOGIN_URL, {
+    username,
     password,
   })
 }

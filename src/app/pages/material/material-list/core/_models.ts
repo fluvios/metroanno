@@ -11,7 +11,7 @@ export type Material = {
   CurrentTotalNumberOfQuestionsAnnotated?: number
 }
 
-export type UsersQueryResponse = Response<Array<Material>>
+export type MaterialsQueryResponse = Response<Array<Material>>
 
 export const initialMaterial: Material = {
   LearningOutcome: '',
