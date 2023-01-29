@@ -3,7 +3,7 @@ import {ID, Response} from '../../../../../_metronic/helpers'
 import {Material, MaterialsQueryResponse} from './_models'
 
 const API_URL = process.env.REACT_APP_API_URL
-const DOCUMENT_URL = `${API_URL}/documents`
+const DOCUMENT_URL = `${API_URL}documents/`
 
 const getDocuments = (): Promise<MaterialsQueryResponse> => {
   return axios
@@ -27,7 +27,7 @@ const createDocument = (doc: Material): Promise<Material | undefined> => {
 
 const editDocument = (doc: Material): Promise<Material | undefined> => {
   return axios
-    .post(`${DOCUMENT_URL}/${doc.ID}`, doc)
+    .post(`${DOCUMENT_URL}/${doc.id}`, doc)
     .then((response: AxiosResponse<Response<Material>>) => response.data)
     .then((response: Response<Material>) => response.data)
 }

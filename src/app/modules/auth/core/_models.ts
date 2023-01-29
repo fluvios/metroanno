@@ -51,25 +51,26 @@ export interface UserSocialNetworksModel {
   instagram: string
 }
 
+export interface UserProfileModel {
+  document: string
+  user: {
+    id: number
+    type: number
+    is_document_annotator: boolean
+    is_question_annotator: boolean
+    subject_preference: string
+    username: string
+    contact: string
+    age: number
+    number_of_document_added?: number
+    number_of_question_annotated?: number
+    status: string
+    current_document_id: number
+  }
+}
+
 export interface UserModel {
-  id: number
-  username: string
-  password: string | undefined
-  email: string
-  first_name: string
-  last_name: string
-  fullname?: string
-  occupation?: string
-  companyName?: string
-  phone?: string
-  roles?: Array<number>
-  pic?: string
-  language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
-  timeZone?: string
-  website?: 'https://keenthemes.com'
-  emailSettings?: UserEmailSettingsModel
-  auth?: AuthModel
-  communication?: UserCommunicationModel
-  address?: UserAddressModel
-  socialNetworks?: UserSocialNetworksModel
+  code: number
+  message: string
+  data: UserProfileModel
 }

@@ -22,6 +22,8 @@ export type SearchState = {
 }
 
 export type Response<T> = {
+  code?: number
+  message?: string
   data?: T
   payload?: {
     message?: string

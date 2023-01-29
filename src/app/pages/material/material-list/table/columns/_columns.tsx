@@ -1,6 +1,6 @@
 // @ts-nocheck
 import {Column} from 'react-table'
-import {UserInfoCell} from './UserInfoCell'
+import {MaterialInfoCell} from './MaterialInfoCell'
 import {UserLastLoginCell} from './UserLastLoginCell'
 import {UserTwoStepsCell} from './UserTwoStepsCell'
 import {UserActionsCell} from './UserActionsCell'
@@ -18,12 +18,12 @@ const usersColumns: ReadonlyArray<Column<Material>> = [
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Subject' className='min-w-125px' />,
     id: 'subject',
-    Cell: ({...props}) => <UserInfoCell user={props.data[props.row.index]} />,
+    Cell: ({...props}) => <MaterialInfoCell user={props.data[props.row.index].text_document} />,
   },
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Learning Outcome' className='min-w-125px' />,
     id: 'learningoutcome',
-    Cell: ({...props}) => <UserInfoCell user={props.data[props.row.index]} />,
+    Cell: ({...props}) => <MaterialInfoCell user={props.data[props.row.index].learning_outcome} />,
   },
   {
     Header: (props) => (

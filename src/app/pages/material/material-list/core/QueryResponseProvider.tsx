@@ -31,7 +31,7 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
     refetch,
     data: response,
   } = useQuery(
-    `${QUERIES.USERS_LIST}-${query}`,
+    `${QUERIES.DOCS_LIST}-${query}`,
     () => {
       return getDocuments()
     },

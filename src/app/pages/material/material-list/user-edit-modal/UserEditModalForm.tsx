@@ -32,8 +32,8 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
 
   const [userForEdit] = useState<Material>({
     ...user,
-    LearningOutcome: user.LearningOutcome || initialMaterial.LearningOutcome,
-    TextDocument: user.TextDocument || initialMaterial.TextDocument,
+    learning_outcome: user.learning_outcome || initialMaterial.learning_outcome,
+    text_document: user.text_document || initialMaterial.text_document,
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -49,7 +49,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       try {
-        if (isNotEmpty(values.ID)) {
+        if (isNotEmpty(values.id)) {
           await editDocument(values)
         } else {
           await createDocument(values)
