@@ -3,17 +3,17 @@ import {useTable, ColumnInstance, Row} from 'react-table'
 import {CustomHeaderColumn} from './columns/CustomHeaderColumn'
 import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
-import {usersColumns} from './columns/_columns'
+import {materialsColumns} from './columns/_columns'
 import {Material} from '../core/_models'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
 import {UsersListPagination} from '../components/pagination/UsersListPagination'
 import {KTCardBody} from '../../../../../_metronic/helpers'
 
 const MaterialsTable = () => {
-  const users = useQueryResponseData()
+  const materials = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
-  const data = useMemo(() => users, [users])
-  const columns = useMemo(() => usersColumns, [])
+  const data = useMemo(() => materials, [materials])
+  const columns = useMemo(() => materialsColumns, [])
   const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
     columns,
     data,
@@ -23,7 +23,7 @@ const MaterialsTable = () => {
     <KTCardBody className='py-4'>
       <div className='table-responsive'>
         <table
-          id='kt_table_users'
+          id='kt_table_materials'
           className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
           {...getTableProps()}
         >
@@ -35,6 +35,20 @@ const MaterialsTable = () => {
             </tr>
           </thead>
           <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
+            {rows.length > 0 ? (
+              rows.map((row: Row<Material>, i) => {
+                prepareRow(row)
+                return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+              })
+            ) : (
+              <tr>
+                <td colSpan={7}>
+                  <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                    No matching records found
+                  </div>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

@@ -9,7 +9,7 @@ import {UserCustomHeader} from './UserCustomHeader'
 import {UserSelectionHeader} from './UserSelectionHeader'
 import {Material} from '../../core/_models'
 
-const usersColumns: ReadonlyArray<Column<Material>> = [
+const materialsColumns: ReadonlyArray<Column<Material>> = [
   {
     Header: (props) => <UserSelectionHeader tableProps={props} />,
     id: 'selection',
@@ -18,7 +18,7 @@ const usersColumns: ReadonlyArray<Column<Material>> = [
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Subject' className='min-w-125px' />,
     id: 'subject',
-    Cell: ({...props}) => <MaterialInfoCell user={props.data[props.row.index].text_document} />,
+    Cell: ({...props}) => <MaterialInfoCell user={props.data[props.row.index]} />,
   },
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Learning Outcome' className='min-w-125px' />,
@@ -41,4 +41,4 @@ const usersColumns: ReadonlyArray<Column<Material>> = [
   },
 ]
 
-export {usersColumns}
+export {materialsColumns}
