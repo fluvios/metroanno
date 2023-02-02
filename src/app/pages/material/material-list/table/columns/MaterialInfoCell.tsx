@@ -5,16 +5,16 @@ import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {Material} from '../../core/_models'
 
 type Props = {
-  materials: Material
+  material: any
 }
 
-const MaterialInfoCell: FC<Props> = ({materials}) => (
+const MaterialInfoCell: FC<Props> = ({material}) => (
   <div className='d-flex align-items-center'>
     {/* begin:: Avatar */}
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
       </a>
-      <span>{materials.subject_id}</span>
+      <span>{material}</span>
     </div>
   </div>
 )

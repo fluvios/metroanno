@@ -18,12 +18,12 @@ const materialsColumns: ReadonlyArray<Column<Material>> = [
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Subject' className='min-w-125px' />,
     id: 'subject',
-    Cell: ({...props}) => <MaterialInfoCell user={props.data[props.row.index]} />,
+    Cell: ({...props}) => <MaterialInfoCell material={props.data[props.row.index].text_document} />,
   },
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Learning Outcome' className='min-w-125px' />,
     id: 'learningoutcome',
-    Cell: ({...props}) => <MaterialInfoCell user={props.data[props.row.index].learning_outcome} />,
+    Cell: ({...props}) => <MaterialInfoCell material={props.data[props.row.index].learning_outcome} />,
   },
   {
     Header: (props) => (

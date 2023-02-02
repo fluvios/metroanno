@@ -32,13 +32,13 @@ const editDocument = (doc: Material): Promise<Material | undefined> => {
     .then((response: Response<Material>) => response.data)
 }
 
-// const deleteUser = (userId: ID): Promise<void> => {
-//   return axios.delete(`${DOCUMENT_URL}/${userId}`).then(() => {})
-// }
+const deleteDocument = (id: ID): Promise<void> => {
+  return axios.delete(`${DOCUMENT_URL}delete/${id}`).then(() => {})
+}
 
 // const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
 //   const requests = userIds.map((id) => axios.delete(`${DOCUMENT_URL}/${id}`))
 //   return axios.all(requests).then(() => {})
 // }
 
-export {getDocuments, getDocumentsByID, createDocument, editDocument}
+export {getDocuments, getDocumentsByID, createDocument, editDocument, deleteDocument}
