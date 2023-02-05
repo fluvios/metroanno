@@ -2,7 +2,7 @@ import {FC, useState} from 'react'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {isNotEmpty, toAbsoluteUrl, KTSVG} from '../../../../../_metronic/helpers'
-import {initialUser, QuestionAnnotation} from '../core/_models'
+import {initialQuestion, QuestionAnnotation} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
@@ -35,8 +35,8 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
 
   const [userForEdit] = useState<QuestionAnnotation>({
     ...user,
-    QuestionText: user.QuestionText || initialUser.QuestionText,
-    AnswerText: user.AnswerText || initialUser.AnswerText,
+    question_text: user.question_text || initialQuestion.question_text,
+    answer_text: user.answer_text || initialQuestion.answer_text,
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -57,7 +57,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       try {
-        if (isNotEmpty(values.ID)) {
+        if (isNotEmpty(values.question_type_id)) {
           await updateUser(values)
         } else {
           await createUser(values)

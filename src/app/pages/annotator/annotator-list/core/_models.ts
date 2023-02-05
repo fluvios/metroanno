@@ -1,22 +1,33 @@
 import {ID, Response} from '../../../../../_metronic/helpers'
 
+export type Feedback = {
+  document_id?: ID
+  feedback_text?: string
+}
+
 export type QuestionAnnotation = {
-  ID?: ID
-  UserID?: ID
-  DocumentID?: ID
-  isLearningOutcomeShown?: boolean
-  QuestionOrder?: number
-  QuestionTypeID?: ID
-  Keywords?: string
-  QuestionText?: string
-  AnswerText?: string
-  TimeDuration?: number
-  StatusApproval?: string
+  question_type_id?: ID
+  keywords?: string
+  question_text?: string
+  answer_text?: string
+}
+
+export type QuestionAnnotationRequest = {
+  document_id?: ID
+  is_learning_outcome_shown: boolean
+  time_duration: number
+  question_annotations: Array<QuestionAnnotation>
 }
 
 export type UsersQueryResponse = Response<Array<QuestionAnnotation>>
+export type QuestionAnnotationResponse = Response<Array<QuestionAnnotation>>
 
-export const initialUser: QuestionAnnotation = {
-  QuestionText: '',
-  AnswerText: ''
+export const initialFeedback: Feedback = {
+  feedback_text: ''
+}
+
+export const initialQuestion: QuestionAnnotation = {
+  keywords: '',
+  question_text: '',
+  answer_text: ''
 }

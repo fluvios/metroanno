@@ -20,14 +20,14 @@ const getDocumentsByID = (id: ID): Promise<Material | undefined> => {
 
 const createDocument = (doc: Material): Promise<Material | undefined> => {
   return axios
-    .put(DOCUMENT_URL, doc)
+    .post(`${DOCUMENT_URL}create`, doc)
     .then((response: AxiosResponse<Response<Material>>) => response.data)
     .then((response: Response<Material>) => response.data)
 }
 
 const editDocument = (doc: Material): Promise<Material | undefined> => {
   return axios
-    .post(`${DOCUMENT_URL}/${doc.id}`, doc)
+    .put(`${DOCUMENT_URL}${doc.id}`, doc)
     .then((response: AxiosResponse<Response<Material>>) => response.data)
     .then((response: Response<Material>) => response.data)
 }

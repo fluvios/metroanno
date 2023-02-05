@@ -1,10 +1,26 @@
 import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
-import {QuestionAnnotation, UsersQueryResponse} from './_models'
+import {QuestionAnnotationRequest, Feedback, QuestionAnnotation, UsersQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
+const API_URL = process.env.REACT_APP_API_URL
+const ANNOTATION_URL = `${API_URL}question-annotations/`
+const FEEDBACK_URL = `${API_URL}feedback/`
 const USER_URL = `${API_URL}/user`
 const GET_USERS_URL = `${API_URL}/users/query`
+
+const bulkAddAnnotation = (doc: QuestionAnnotationRequest): Promise<QuestionAnnotation | undefined> => {
+  return axios
+    .post(`${ANNOTATION_URL}create`, doc)
+    .then((response: AxiosResponse<Response<QuestionAnnotation>>) => response.data)
+    .then((response: Response<QuestionAnnotation>) => response.data)
+}
+
+const addFeedback = (doc: Feedback): Promise<Feedback | undefined> => {
+  return axios
+    .post(`${FEEDBACK_URL}create`, doc)
+    .then((response: AxiosResponse<Response<Feedback>>) => response.data)
+    .then((response: Response<Feedback>) => response.data)
+}
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios
@@ -28,7 +44,7 @@ const createUser = (user: QuestionAnnotation): Promise<QuestionAnnotation | unde
 
 const updateUser = (user: QuestionAnnotation): Promise<QuestionAnnotation | undefined> => {
   return axios
-    .post(`${USER_URL}/${user.ID}`, user)
+    .post(`${USER_URL}/${user.question_type_id}`, user)
     .then((response: AxiosResponse<Response<QuestionAnnotation>>) => response.data)
     .then((response: Response<QuestionAnnotation>) => response.data)
 }
@@ -42,4 +58,4 @@ const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
   return axios.all(requests).then(() => {})
 }
 
-export {getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateUser}
+export {getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateUser, bulkAddAnnotation, addFeedback}
