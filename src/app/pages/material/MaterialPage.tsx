@@ -1,6 +1,6 @@
 import {Route, Routes, Outlet, Navigate} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import {UsersListWrapper} from './material-list/MaterialList'
+import {MaterialListWrapper} from './material-list/MaterialList'
 
 const usersBreadcrumbs: Array<PageLink> = [
   {
@@ -26,7 +26,7 @@ const MaterialPage = () => {
           element={
             <>
               <PageTitle breadcrumbs={usersBreadcrumbs}>Material list</PageTitle>
-              <UsersListWrapper />
+              <MaterialListWrapper />
             </>
           }
         />

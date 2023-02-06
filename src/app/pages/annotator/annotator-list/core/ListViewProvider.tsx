@@ -16,6 +16,7 @@ const ListViewContext = createContext<ListViewContextProps>(initialListView)
 const ListViewProvider: FC<WithChildren> = ({children}) => {
   const [selected, setSelected] = useState<Array<ID>>(initialListView.selected)
   const [itemIdForUpdate, setItemIdForUpdate] = useState<ID>(initialListView.itemIdForUpdate)
+  const [itemHighlightIdForUpdate, setItemHighlightIdForUpdate] = useState<ID>(initialListView.itemIdForUpdate)
   const {isLoading} = useQueryResponse()
   const data = useQueryResponseData()
   const disabled = useMemo(() => calculatedGroupingIsDisabled(isLoading, data), [isLoading, data])
@@ -26,7 +27,9 @@ const ListViewProvider: FC<WithChildren> = ({children}) => {
       value={{
         selected,
         itemIdForUpdate,
+        itemHighlightIdForUpdate,
         setItemIdForUpdate,
+        setItemHighlightIdForUpdate,
         disabled,
         isAllSelected,
         onSelect: (id: ID) => {

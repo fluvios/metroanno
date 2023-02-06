@@ -1,25 +1,27 @@
 import {ListViewProvider, useListView} from './core/ListViewProvider'
 import {QueryRequestProvider} from './core/QueryRequestProvider'
 import {QueryResponseProvider} from './core/QueryResponseProvider'
-import {UsersListHeader} from './components/header/UsersListHeader'
+import {MaterialsListHeader} from './components/header/MaterialsListHeader'
 import {MaterialsTable} from './table/MaterialsTable'
-import {UserEditModal} from './user-edit-modal/UserEditModal'
+import {UserEditModal} from './material-modal/UserEditModal'
+import {AnnotationEditModal} from './annotation-modal/AnnotationEditModal'
 import {KTCard} from '../../../../_metronic/helpers'
 
 const MaterialList = () => {
-  const {itemIdForUpdate} = useListView()
+  const {itemIdForUpdate, itemHighlightIdForUpdate} = useListView()
   return (
     <>
       <KTCard>
-        <UsersListHeader />
+        <MaterialsListHeader />
         <MaterialsTable />
       </KTCard>
       {itemIdForUpdate !== undefined && <UserEditModal />}
+      {itemHighlightIdForUpdate !== undefined && <AnnotationEditModal />}      
     </>
   )
 }
 
-const UsersListWrapper = () => (
+const MaterialListWrapper = () => (
   <QueryRequestProvider>
     <QueryResponseProvider>
       <ListViewProvider>
@@ -29,4 +31,4 @@ const UsersListWrapper = () => (
   </QueryRequestProvider>
 )
 
-export {UsersListWrapper}
+export {MaterialListWrapper}
