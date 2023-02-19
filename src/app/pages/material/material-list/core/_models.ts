@@ -50,5 +50,6 @@ export const initialMaterial = {
   subject_id: 0,
   learning_outcome: '',
   text_document: '',
-  min_number_of_questions: 0
+  min_number_of_questions: 0,
+  min_number_of_annotators: 0
 }

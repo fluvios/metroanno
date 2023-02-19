@@ -77,29 +77,22 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
           className="fs-6 collapse show ps-10"
           data-bs-parent={"#kt_question_" + questFlags}
         >
-          <form action="">
-            <div className="mb-3">
-              <label className="form-label">Tipe Pertanyaan</label>
-              <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                <ButtonGroup aria-label="Basic example">
-                  <Button className="btn btn-bg-info" variant="secondary">Type 1</Button>
-                  <Button className="btn btn-bg-success" variant="secondary">Type 2</Button>
-                  <Button className="btn btn-bg-warning" variant="secondary">Type 3</Button>
-                  <Button className="btn btn-bg-danger" variant="secondary">Type 4</Button>                
-                </ButtonGroup>              
-              </div>                        
-              <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
-              <div className="form-check form-switch form-check-custom form-check-solid me-10">
-                <textarea className="form-control form-control-white" name="tags" id="tags" cols={1} rows={1} value={tags}>
-                </textarea>
-              {/* <input
-                  type="text"
-                  className="form-control form-control-white"
-                  value={tags}
-                /> */}
-                {/* <Tags name="highlightTags" className="form-control form-control-white" value={tags} /> */}
-              </div>  
-              <div className="d-flex justify-content-end py-6 px-9">
+        <div className="mb-3">
+          <label className="form-label">Tipe Pertanyaan</label>
+          <div className="form-check form-switch form-check-custom form-check-solid me-10">
+            <ButtonGroup aria-label="Basic example">
+              <Button className="btn btn-bg-info" variant="secondary" data-key="1">Type 1</Button>
+              <Button className="btn btn-bg-success" variant="secondary" data-key="2">Type 2</Button>
+              <Button className="btn btn-bg-warning" variant="secondary" data-key="3">Type 3</Button>
+              <Button className="btn btn-bg-danger" variant="secondary" data-key="4">Type 4</Button>                
+            </ButtonGroup>              
+          </div>                        
+          <label className="form-label">Select Bagian Text yang menjadi dasar pembentuk pertanyaan</label>
+          <div className="form-check form-switch form-check-custom form-check-solid me-10">
+            <textarea className="form-control form-control-white" name="tags" id="tags" cols={1} rows={1} value={tags}>
+            </textarea>
+          </div>  
+          <div className="d-flex justify-content-end py-6 px-9">
                 <button
                     type='button'
                     onClick={() => highlightText()}
@@ -134,7 +127,6 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
                 />
               </div> 
             </div>
-          </form>
         </div>
       </div>
   </div>

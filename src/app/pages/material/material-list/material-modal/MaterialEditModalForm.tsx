@@ -19,6 +19,7 @@ const materialSchema = Yup.object({
   learning_outcome: Yup.string().required('Learning Outcome is required'),
   text_document: Yup.string().required('Text Document is required'),
   min_number_of_questions: Yup.number().positive().integer().required('Minimum Question is required'),
+  min_number_of_annotators: Yup.number().positive().integer().required('Minimum Annotators is required'),
 })
 
 const MaterialEditModalForm: FC<Props> = ({material, isMaterialLoading}) => {
@@ -30,7 +31,8 @@ const MaterialEditModalForm: FC<Props> = ({material, isMaterialLoading}) => {
     subject_id: material.subject_id || initialMaterial.subject_id,
     learning_outcome: material.learning_outcome || initialMaterial.learning_outcome,
     text_document: material.text_document || initialMaterial.text_document,
-    min_number_of_questions: material.min_number_of_questions || initialMaterial.min_number_of_questions
+    min_number_of_questions: material.min_number_of_questions || initialMaterial.min_number_of_questions,
+    min_number_of_annotators: material.min_number_of_annotators || initialMaterial.min_number_of_annotators
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -50,7 +52,8 @@ const MaterialEditModalForm: FC<Props> = ({material, isMaterialLoading}) => {
         subject_id: values.subject_id,
         learning_outcome: values.learning_outcome,
         text_document: values.text_document,
-        min_number_of_questions: values.min_number_of_questions
+        min_number_of_questions: values.min_number_of_questions,
+        min_number_of_annotators: values.min_number_of_annotators
       })
 
       try {
@@ -121,7 +124,17 @@ const MaterialEditModalForm: FC<Props> = ({material, isMaterialLoading}) => {
             placeholder=""
             {...formik.getFieldProps('min_number_of_questions')}
             onChange={formik.handleChange}            
-          />
+          />          
+        </div>
+        <div className='mb-10'>
+          <label className="form-label">Jumlah Annotator</label>
+          <input
+            type="text"
+            className="form-control form-control-white"
+            placeholder=""
+            {...formik.getFieldProps('min_number_of_annotators')}
+            onChange={formik.handleChange}            
+          />          
         </div>          
           {/* begin::Actions */}
           <div className='text-center pt-15'>

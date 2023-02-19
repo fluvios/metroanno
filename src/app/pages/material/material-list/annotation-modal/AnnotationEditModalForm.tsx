@@ -72,7 +72,7 @@ const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   return (
     <>
       <div className="mb-12">
-        <label className="form-label">Learning Outcome</label>
+        <label className="form-label">Instruction</label>
         <input
           type="text"
           className="form-control form-control-white"
@@ -125,7 +125,7 @@ const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                 <button
                   type='button'
                   onClick={() => addQuestion()}
-                  className='btn btn-success me-3 pull-right'
+                  className='btn btn-secondary me-3 pull-right'
                   data-kt-users-modal-action='cancel'
                   disabled={formik.isSubmitting || isUserLoading}>
                   Tambah Pertanyaan
