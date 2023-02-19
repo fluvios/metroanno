@@ -5,7 +5,7 @@ import {isNotEmpty, toAbsoluteUrl, KTSVG} from '../../../../../_metronic/helpers
 import {initialQuestion, QuestionAnnotation} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
-import {UsersListLoading} from '../components/loading/UsersListLoading'
+import {ListLoading} from '../components/loading/ListLoading'
 import {bulkAddAnnotation, addFeedback} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 import {QuestionBuilderForm} from './QuestionBuilderForm'
@@ -123,14 +123,23 @@ const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
               {inputList}
               <div className="mb-6">
                 <button
-                  type='reset'
+                  type='button'
                   onClick={() => addQuestion()}
                   className='btn btn-success me-3 pull-right'
                   data-kt-users-modal-action='cancel'
                   disabled={formik.isSubmitting || isUserLoading}>
                   Tambah Pertanyaan
-                </button>                                                                      
-              </div>
+                </button> 
+                <button
+                    type='submit'
+                    // onClick={() => cancel()}
+                    className='btn btn-success me-3 pull-right'
+                    data-kt-users-modal-action='cancel'
+                    // disabled={formik.isSubmitting || isUserLoading}
+                  >
+                    Submit Pertanyaan
+                </button>                                                                     
+              </div>            
               <div className="mb-6">
                 <label className="form-label">Feedback Catatan</label>
                 <input

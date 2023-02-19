@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import {UserEditModalHeader} from './UserEditModalHeader'
+import {AnnotationEditModalHeader} from './AnnotationEditModalHeader'
 import {AnnotationEditModalFormWrapper} from './AnnotationEditModalFormWrapper'
 
 const AnnotationEditModal = () => {
@@ -23,7 +23,7 @@ const AnnotationEditModal = () => {
         <div className='modal-dialog modal-dialog-centered modal-fullscreen'>
           {/* begin::Modal content */}
           <div className='modal-content'>
-            <UserEditModalHeader />
+            <AnnotationEditModalHeader />
             {/* begin::Modal body */}
             <div className='modal-body scroll-y mx-5 mx-xl-15 my-7'>
               <AnnotationEditModalFormWrapper />

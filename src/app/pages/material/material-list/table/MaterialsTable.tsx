@@ -5,7 +5,7 @@ import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {materialsColumns} from './columns/_columns'
 import {Material} from '../core/_models'
-import {UsersListLoading} from '../components/loading/UsersListLoading'
+import {ListLoading} from '../components/loading/ListLoading'
 import {UsersListPagination} from '../components/pagination/UsersListPagination'
 import {KTCardBody} from '../../../../../_metronic/helpers'
 
@@ -53,7 +53,7 @@ const MaterialsTable = () => {
         </table>
       </div>
       <UsersListPagination />
-      {isLoading && <UsersListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

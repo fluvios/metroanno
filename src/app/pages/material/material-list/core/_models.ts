@@ -5,6 +5,7 @@ export type Material = {
   subject_id?: ID
   learning_outcome?: string
   text_document?: string
+  min_number_of_questions?: number
   min_number_of_annotators?: number
   current_number_of_annotators_assigned?: number
   min_number_of_questions_per_annotator?: number
@@ -45,7 +46,9 @@ export const initialQuestion: QuestionAnnotation = {
   answer_text: ''
 }
 
-export const initialMaterial: Material = {
+export const initialMaterial = {
+  subject_id: 0,
   learning_outcome: '',
-  text_document: ''
+  text_document: '',
+  min_number_of_questions: 0
 }

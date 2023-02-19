@@ -3,7 +3,7 @@ import {QueryRequestProvider} from './core/QueryRequestProvider'
 import {QueryResponseProvider} from './core/QueryResponseProvider'
 import {MaterialsListHeader} from './components/header/MaterialsListHeader'
 import {MaterialsTable} from './table/MaterialsTable'
-import {UserEditModal} from './material-modal/UserEditModal'
+import {MaterialEditModal} from './material-modal/MaterialEditModal'
 import {AnnotationEditModal} from './annotation-modal/AnnotationEditModal'
 import {KTCard} from '../../../../_metronic/helpers'
 
@@ -15,7 +15,7 @@ const MaterialList = () => {
         <MaterialsListHeader />
         <MaterialsTable />
       </KTCard>
-      {itemIdForUpdate !== undefined && <UserEditModal />}
+      {itemIdForUpdate !== undefined && <MaterialEditModal />}
       {itemHighlightIdForUpdate !== undefined && <AnnotationEditModal />}      
     </>
   )

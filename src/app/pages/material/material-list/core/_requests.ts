@@ -43,7 +43,7 @@ const getAnnotationsByID = (id: ID): Promise<QuestionAnnotation | undefined> => 
 
 const createDocument = (doc: Material): Promise<Material | undefined> => {
   return axios
-    .post(`${DOCUMENT_URL}create`, doc)
+    .post(`${DOCUMENT_URL}add`, doc)
     .then((response: AxiosResponse<Response<Material>>) => response.data)
     .then((response: Response<Material>) => response.data)
 }

@@ -132,18 +132,7 @@ const QuestionBuilderForm: FC<any> = ({questFlags}) => {
                   className="form-control form-control-white"
                   placeholder=""
                 />
-              </div>
-              <div className="d-flex justify-content-end py-6 px-9">
-                <button
-                    type='reset'
-                    // onClick={() => cancel()}
-                    className='btn btn-success me-3 pull-right'
-                    data-kt-users-modal-action='cancel'
-                    // disabled={formik.isSubmitting || isUserLoading}
-                  >
-                    Submit Pertanyaan
-                </button>
-              </div>  
+              </div> 
             </div>
           </form>
         </div>

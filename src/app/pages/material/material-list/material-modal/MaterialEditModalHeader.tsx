@@ -1,19 +1,19 @@
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
 
-const UserEditModalHeader = () => {
+const MaterialEditModalHeader = () => {
   const {setItemIdForUpdate} = useListView()
 
   return (
     <div className='modal-header'>
       {/* begin::Modal title */}
-      <h2 className='fw-bolder'>Add Annotation</h2>
+      <h2 className='fw-bolder'>Add Material</h2>
       {/* end::Modal title */}
 
       {/* begin::Close */}
       <div
         className='btn btn-icon btn-sm btn-active-icon-primary'
-        data-kt-users-modal-action='close'
+        data-kt-materials-modal-action='close'
         onClick={() => setItemIdForUpdate(undefined)}
         style={{cursor: 'pointer'}}
       >
@@ -24,4 +24,4 @@ const UserEditModalHeader = () => {
   )
 }
 
-export {UserEditModalHeader}
+export {MaterialEditModalHeader}
