@@ -1,0 +1,8 @@
+{
+  "apps": [
+    {
+      "name": "fe-metroanno",
+      "script": "yarn start"
+    }
+  ]
+}
