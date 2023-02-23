@@ -7,7 +7,7 @@ echo "===========================DEPLOYMENT==========================="
 echo "================================================================"
 
 echo "Update codebase..."
-cd ~/partime/metroanno
+cd ~/parttime/metroanno
 git fetch origin main
 git reset --hard origin/main
 
