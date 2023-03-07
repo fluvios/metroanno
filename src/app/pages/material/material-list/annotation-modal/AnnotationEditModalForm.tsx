@@ -2,7 +2,7 @@ import {FC, useState} from 'react'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {isNotEmpty, toAbsoluteUrl, KTSVG} from '../../../../../_metronic/helpers'
-import {initialQuestion, QuestionAnnotation} from '../core/_models'
+import {Feedback, initialFeedback, MaterialQueryResponse, QuestionAnnotationRequest} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
 import {ListLoading} from '../components/loading/ListLoading'
@@ -12,31 +12,25 @@ import {QuestionBuilderForm} from './QuestionBuilderForm'
 
 type Props = {
   isUserLoading: boolean
-  user: QuestionAnnotation
+  feedback: Feedback
+  material: MaterialQueryResponse
 }
 
-const editUserSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
-  name: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Name is required'),
+const editFeedbackSchema = Yup.object().shape({
+  document_id: Yup.number().positive().integer().required('Document Id is required'),
+  feedback_text: Yup.string().required('Feedback Text is required')
 })
 
-const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
+const AnnotationEditModalForm: FC<Props> = ({feedback, material, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
   const [inputList, setInputList] = useState<any[]>([])
   const [questFlags,setQuestFlag] = useState(1)
 
-  const [userForEdit] = useState<QuestionAnnotation>({
-    ...user,
-    question_text: user.question_text || initialQuestion.question_text,
-    answer_text: user.answer_text || initialQuestion.answer_text,
+  const [feedbackForEdit] = useState<Feedback>({
+    ...feedback,
+    document_id: feedback.document_id || initialFeedback.document_id,
+    feedback_text: feedback.feedback_text || initialFeedback.feedback_text,
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -51,14 +45,24 @@ const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
     setInputList(inputList.concat(<QuestionBuilderForm questFlags={questFlags} />))
   }
 
+  const addQuestionaire = (data: QuestionAnnotationRequest) => {
+    try {
+      bulkAddAnnotation(data)
+    } catch (ex) {
+      console.error(ex)
+    } finally {
+      cancel(true)
+    }
+  }
+
   const formik = useFormik({
-    initialValues: userForEdit,
-    validationSchema: editUserSchema,
+    initialValues: feedbackForEdit,
+    validationSchema: editFeedbackSchema,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       try {
-        if (isNotEmpty(values.question_type_id)) {
-          // await bulkAddAnnotation(values)
+        if (isNotEmpty(values.document_id)) {
+          addFeedback(values);
         }
       } catch (ex) {
         console.error(ex)
@@ -131,8 +135,8 @@ const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                   Tambah Pertanyaan
                 </button> 
                 <button
-                    type='submit'
-                    // onClick={() => cancel()}
+                    type='button'
+                    //onClick={(data) => addQuestionaire(data)}
                     className='btn btn-success me-3 pull-right'
                     data-kt-users-modal-action='cancel'
                     // disabled={formik.isSubmitting || isUserLoading}
@@ -149,7 +153,7 @@ const AnnotationEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                 />
               </div>
               <button
-                type='reset'
+                type='submit'
                 onClick={() => cancel()}
                 className='btn btn-light me-3 pull-right'
                 data-kt-users-modal-action='cancel'

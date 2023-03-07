@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
-import {Material, MaterialsQueryResponse, QuestionAnnotation, QuestionAnnotationRequest, Feedback} from './_models'
+import {Material, MaterialsQueryResponse, MaterialQueryResponse, QuestionAnnotation, QuestionAnnotationRequest, Feedback} from './_models'
 
 const API_URL = process.env.REACT_APP_API_URL
 const DOCUMENT_URL = `${API_URL}documents/`
@@ -34,6 +34,12 @@ const getDocumentsByID = (id: ID): Promise<Material | undefined> => {
     .then((response: Response<Material>) => response.data)
 }
 
+const randomDocument = (): Promise<MaterialQueryResponse | undefined> => {
+  return axios
+    .get(`${DOCUMENT_URL}/random-user`)
+    .then((d: AxiosResponse<MaterialQueryResponse>) => d.data)
+}
+
 const getAnnotationsByID = (id: ID): Promise<QuestionAnnotation | undefined> => {
   return axios
     .get(`${ANNOTATION_URL}/${id}`)
@@ -64,4 +70,4 @@ const deleteDocument = (id: ID): Promise<void> => {
 //   return axios.all(requests).then(() => {})
 // }
 
-export {bulkAddAnnotation, addFeedback, getDocuments, getDocumentsByID, getAnnotationsByID, createDocument, editDocument, deleteDocument}
+export {bulkAddAnnotation, addFeedback, getDocuments, getDocumentsByID, getAnnotationsByID, createDocument, editDocument, deleteDocument, randomDocument}

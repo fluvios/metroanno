@@ -35,6 +35,7 @@ export type QuestionAnnotationRequest = {
 export type UsersQueryResponse = Response<Array<QuestionAnnotation>>
 export type QuestionAnnotationResponse = Response<Array<QuestionAnnotation>>
 export type MaterialsQueryResponse = Response<Array<Material>>
+export type MaterialQueryResponse = Response<Material>
 
 export const initialFeedback: Feedback = {
   feedback_text: ''

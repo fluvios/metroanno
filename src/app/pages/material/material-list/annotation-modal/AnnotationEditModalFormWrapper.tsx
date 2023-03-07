@@ -2,19 +2,19 @@ import {useQuery} from 'react-query'
 import {AnnotationEditModalForm} from './AnnotationEditModalForm'
 import {isNotEmpty, QUERIES} from '../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
-import {getAnnotationsByID} from '../core/_requests'
+import {randomDocument} from '../core/_requests'
 
 const AnnotationEditModalFormWrapper = () => {
   const {itemIdForUpdate, setItemIdForUpdate} = useListView()
   const enabledQuery: boolean = isNotEmpty(itemIdForUpdate)
   const {
     isLoading,
-    data: annotation,
+    data: material,
     error,
   } = useQuery(
-    `${QUERIES.USERS_LIST}-user-${itemIdForUpdate}`,
+    `${QUERIES.USERS_LIST}-annotation-${itemIdForUpdate}`,
     () => {
-      return getAnnotationsByID(itemIdForUpdate)
+      return randomDocument()
     },
     {
       cacheTime: 0,
@@ -27,11 +27,29 @@ const AnnotationEditModalFormWrapper = () => {
   )
 
   if (!itemIdForUpdate) {
-    return <AnnotationEditModalForm isUserLoading={isLoading} user={{question_type_id: undefined}} />
+    if (material) {
+      return <AnnotationEditModalForm isUserLoading={isLoading} material={material} feedback={{
+        document_id: undefined,
+        feedback_text: undefined
+      }} />
+    } else {
+      return <AnnotationEditModalForm isUserLoading={isLoading} feedback={{
+        document_id: undefined,
+        feedback_text: undefined
+      }} material={{
+        code: undefined,
+        message: undefined,
+        data: undefined,
+        payload: undefined
+      }} /> 
+    }
   }
 
-  if (!isLoading && !error && annotation) {
-    return <AnnotationEditModalForm isUserLoading={isLoading} user={annotation} />
+  if (!isLoading && !error && material) {
+    return <AnnotationEditModalForm isUserLoading={isLoading} material={material} feedback={{
+      document_id: undefined,
+      feedback_text: undefined
+    }} />
   }
 
   return null
