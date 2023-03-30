@@ -36,7 +36,7 @@ const getDocumentsByID = (id: ID): Promise<Material | undefined> => {
 
 const randomDocument = (): Promise<MaterialQueryResponse | undefined> => {
   return axios
-    .get(`${DOCUMENT_URL}/random-user`)
+    .post(`${DOCUMENT_URL}random-user`)
     .then((d: AxiosResponse<MaterialQueryResponse>) => d.data)
 }
 

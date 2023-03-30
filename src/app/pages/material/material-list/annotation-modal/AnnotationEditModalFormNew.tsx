@@ -3,6 +3,9 @@ import {Feedback, MaterialQueryResponse, QuestionAnnotation} from '../core/_mode
 import {useListView} from '../core/ListViewProvider'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 import AnnotationBuilder from './AnnotationBuilder'
+import { bulkAddAnnotation, randomDocument } from '../core/_requests'
+import React from 'react'
+import { useQuery } from 'react-query'
 
 type Props = {
   isUserLoading: boolean
@@ -23,6 +26,26 @@ const AnnotationEditModalFormNew: FC<Props> = ({feedback, material, isUserLoadin
   useEffect(() => {
     setStartOpen(Date.now())
   }, [])
+
+  const {
+    isLoading,
+    data: document,
+    error,
+  } = useQuery(
+    ``,
+    () => {
+      return randomDocument()
+    },
+    {
+      cacheTime: 0,
+      onSuccess: (data) => {
+        
+      },
+      onError: (err) => {
+        console.error(err)
+      },
+    }
+  )
 
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
@@ -49,8 +72,15 @@ const AnnotationEditModalFormNew: FC<Props> = ({feedback, material, isUserLoadin
       time_duration: ~~((Date.now() - startOpen)/100),
       question_annotations: annotations
     }
-    alert(JSON.stringify(req))
-    setIsSubmitting(false)
+    // alert(JSON.stringify(req))
+
+    try {
+      bulkAddAnnotation(req)
+    } catch (ex) {
+      console.error(ex)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -72,17 +102,7 @@ const AnnotationEditModalFormNew: FC<Props> = ({feedback, material, isUserLoadin
               <div className='mb-6'>
                 <label className='form-label'>Materi</label>
                 <div id='materialContent' className='form-control form-control-white'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius tortor
-                  quis nulla cursus vulputate. Vivamus sit amet dui sollicitudin tortor placerat
-                  tincidunt. Aenean rhoncus vel orci in dignissim. Sed rutrum aliquam felis eget
-                  cursus. Mauris interdum nibh in mi blandit, sit amet porta velit scelerisque.
-                  Vestibulum turpis nunc, interdum imperdiet commodo quis, luctus vel eros. Ut at
-                  convallis dolor. Vestibulum elementum leo lacus, accumsan eleifend risus bibendum
-                  non. Ut imperdiet rhoncus commodo. Etiam facilisis ligula a dictum eleifend. Morbi
-                  molestie risus quis enim finibus, et vestibulum libero pellentesque. Sed auctor
-                  urna vel nunc efficitur sagittis. Proin porttitor luctus neque sit amet molestie.
-                  Donec diam ligula, tristique lacinia ex quis, vulputate lacinia lorem. Nam
-                  suscipit metus eget tristique tincidunt.
+                  {document?.data?.text_document}
                 </div>
               </div>
               <div className='mb-12'>
@@ -102,6 +122,7 @@ const AnnotationEditModalFormNew: FC<Props> = ({feedback, material, isUserLoadin
                     }}
                   />
                 </label>
+                {document?.data?.learning_outcome}
               </div>
               <hr />
               <button
